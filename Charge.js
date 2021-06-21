@@ -30,7 +30,7 @@ router.post("/chargeRequest", async (req, res) => {
         },
       },
       {
-        headers: { authorization: "Bearer sk_test_7gPAojt2bMQZH4lBURKOur8T" },
+        headers: { authorization: "Bearer sk_live_fI60BOR3UTmyqpgbPSxwEWY7" },
       }
     )
     .then((response) => {
