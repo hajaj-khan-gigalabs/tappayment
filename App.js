@@ -1,39 +1,27 @@
 const express = require("express");
 const cors = require("cors");
-const helmet = require("helmet");
-const path = require('path');
+
+const path = require("path");
 
 // Create global app object
 var app = express();
 
 app.use(cors());
-// app.use(helmet());
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     useDefaults: false,
-//     directives: {
-//       "default-src": helmet.contentSecurityPolicy.dangerouslyDisableDefaultSrc,
-//       "script-src": ["'self'"],
-//     },
-//   })
-// );
 // Normal express config defaults
 app.use(express.json());
-app.use(express.static('public'))
+app.use(express.static("public"));
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.get('/',function(req,res){
-  console.log('sssssssssssss: ',path.join('/views/Card.html'))
-  res.sendFile(path.join(__dirname+'/views/Card.html'));
+app.get("/", function (req, res) {
+  console.log("sssssssssssss: ", path.join("/views/Card.html"));
+  res.sendFile(path.join(__dirname + "/views/Card.html"));
 });
 
-app.get('tap', (req, res) => {
-  res.render('ejsCard')
-})
+app.get("tap", (req, res) => {
+  res.render("ejsCard");
+});
 //Routes
 app.use("/api/serverCharge", require("./Charge"));
 
