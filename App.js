@@ -7,8 +7,16 @@ const path = require('path');
 var app = express();
 
 app.use(cors());
-app.use(helmet());
-
+// app.use(helmet());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: false,
+//     directives: {
+//       "default-src": helmet.contentSecurityPolicy.dangerouslyDisableDefaultSrc,
+//       "script-src": ["'self'"],
+//     },
+//   })
+// );
 // Normal express config defaults
 app.use(express.json());
 app.use(express.static('public'))
@@ -23,7 +31,7 @@ app.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/views/Card.html'));
 });
 
-app.get('/tap', (req, res) => {
+app.get('tap', (req, res) => {
   res.render('ejsCard')
 })
 //Routes
