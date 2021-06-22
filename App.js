@@ -21,7 +21,9 @@ app.get("/", function (req, res) {
 app.get("/transction", function (req, res) {
   console.log('Welcome To Transction Page')
   console.log('88888888888888888888888888888888888',req);
-  return res.send(req);
+  console.log('data++++++++++++++++++++++',req.data , );
+  console.log('error------------------------',req.error);
+  console.log('payload--------------------',req.payload);
   console.log('***************************************',req.body)
   res.sendFile(path.join(__dirname + "/views/Transction.html"));
 });
