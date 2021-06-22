@@ -2,35 +2,32 @@ const router = require("express").Router();
 const axios = require("axios");
 
 router.post("/chargeRequest", async (req, res) => {
+  console.log("sssssssssssssss: ", process.env.HOST);
+  var params = req.body.params;
   const response = await axios
     .post(
       "https://api.tap.company/v2/charges",
       {
-        amount: 1,
-        currency: "KWD",
+        amount: params.amount,
+        currency: params.currency,
         threeDSecure: true,
         save_card: false,
-        description: "Test Description",
-        statement_descriptor: "Sample",
         metadata: { udf1: "test 1", udf2: "test 2" },
-        reference: { transaction: "txn_0001", order: "ord_0001" },
-        receipt: { email: false, sms: false },
+        reference: { transaction: params.reference, order: params.reference },
         customer: {
-          first_name: "test",
-          middle_name: "test",
-          last_name: "test",
+          first_name: req.body.card.name,
           email: "test@test.com",
           phone: { country_code: "965", number: "50000000" },
         },
         merchant: { id: "4516775" },
         source: { id: req.body.id },
-        post: { url: "http://localhost:3001/token/postCharge" },
+        post: { url: process.env.HOST + "/api/token/postCharge" },
         redirect: {
-          url: "http://127.0.0.1:5500/payment-integration-react/src/RedirectPage.html",
+          url: process.env.HOST + "/transction",
         },
       },
       {
-        headers: { authorization: "Bearer sk_live_fI60BOR3UTmyqpgbPSxwEWY7" },
+        headers: { authorization: "Bearer sk_test_7gPAojt2bMQZH4lBURKOur8T" },
       }
     )
     .then((response) => {
@@ -39,7 +36,7 @@ router.post("/chargeRequest", async (req, res) => {
     })
     .catch((err) => {
       console.log("Resuest Error", err);
-      return res.status(200).json(err);
+      return res.status(400).json(err);
     });
 
   //write code to store transaction locally.

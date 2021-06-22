@@ -81,7 +81,7 @@ function postToServer(result) {
   // var url = new URL(url_string);
   // var c = url.searchParams.get("auth");
   // console.log("Params",c);
-  
+
   axios
     .post(apiUrl + "/serverCharge/chargeRequest", result)
     .then((res) => {
