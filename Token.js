@@ -11,6 +11,7 @@ router.post("/postCharge", (req, res) => {
   console.log(
     "********************************* After Printing*****************************************"
   );
+  return res.status(200).json({ status: "check" });
 });
 
 module.exports = router;
