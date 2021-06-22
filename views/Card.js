@@ -73,7 +73,7 @@ card.addEventListener("change", function (event) {
   }
 });
 
-function postToServer(result) {
+async function postToServer(result) {
   console.log("DATA SEND TO SERVER", result);
   // code for geting params fromn url
 
@@ -82,6 +82,15 @@ function postToServer(result) {
   // var c = url.searchParams.get("auth");
   // console.log("Params",c);
 
+  var queryDict = {};
+  await location.search
+    .substr(1)
+    .split("&")
+    .forEach(function (item) {
+      queryDict[item.split("=")[0]] = item.split("=")[1];
+    });
+
+  result.params = queryDict;
   axios
     .post(apiUrl + "/serverCharge/chargeRequest", result)
     .then((res) => {
