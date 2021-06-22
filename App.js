@@ -14,10 +14,12 @@ app.use(express.static("public"));
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/", function (req, res) {
+  console.log('Welcome To App')
   res.sendFile(path.join(__dirname + "/views/Card.html"));
 });
 
 app.get("/transction", function (req, res) {
+  console.log('Welcome To Transction Page')
   res.sendFile(path.join(__dirname + "/views/Transction.html"));
 });
 //Routes

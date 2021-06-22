@@ -21,9 +21,9 @@ router.post("/chargeRequest", async (req, res) => {
         },
         merchant: { id: "4516775" },
         source: { id: req.body.id },
-        post: { url: process.env.HOST + "/api/token/postCharge" },
+        post: { url: "https://tap-payment.herokuapp.com/api/token/postCharge" },
         redirect: {
-          url: process.env.HOST + "/transction",
+          url: "https://tap-payment.herokuapp.com/transction",
         },
       },
       {
