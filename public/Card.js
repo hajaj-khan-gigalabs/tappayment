@@ -93,8 +93,8 @@ async function postToServer(result) {
     .then((res) => {
       console.log("Charge Responce: ", res);
       console.log("Redirect To returnUrl with charge Response");
-      if (res.status === "INITIATED") {
-        window.location.assign(res.data.transaction.url);
+      if (res.data.status == "INITIATED") {
+        window.location.href = res.data.transaction.url;
       }
     })
     .catch((err) => console.error("error from server : ", err));
