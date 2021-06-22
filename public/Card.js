@@ -1,7 +1,7 @@
 //pass your public key from tap's dashboard
 var tap = Tapjsli("pk_test_qZypCznEF3QklDJdPGbj2tTS");
-// let apiUrl = "https://tap-payment.herokuapp.com/api";
-let apiUrl = "http://localhost:3000/api";
+let apiUrl = "https://tap-payment.herokuapp.com/api";
+// let apiUrl = "http://localhost:3000/api";
 
 
 let parentSite = "https://www.google.com";
