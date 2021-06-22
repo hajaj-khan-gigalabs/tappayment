@@ -32,6 +32,7 @@ router.post("/chargeRequest", async (req, res) => {
     )
     .then((response) => {
       console.log("Resuest Response", response.data);
+      var cryptoString = "";
       return res.status(200).json(response.data);
     })
     .catch((err) => {
