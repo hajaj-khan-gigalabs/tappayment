@@ -53,7 +53,7 @@ form.addEventListener("submit", function (event) {
     } else {
       // Send the token to your server
       var errorElement = document.getElementById("success");
-      errorElement.style.display = "block";
+      // errorElement.style.display = "block";
       var tokenElement = document.getElementById("token");
       tokenElement.textContent = result.id;
     }
