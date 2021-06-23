@@ -1,4 +1,4 @@
-let apiUrl = "https://tap-payment.herokuapp.com/api";
+let apiUrl = "https://www.minmaxopt.com/api";
 // let apiUrl = "http://localhost:3000/api";
 
 async function postToServer() {
