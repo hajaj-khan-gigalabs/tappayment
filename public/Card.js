@@ -3,9 +3,6 @@ var tap = Tapjsli("pk_test_qZypCznEF3QklDJdPGbj2tTS");
 let apiUrl = "https://tap-payment.herokuapp.com/api";
 // let apiUrl = "http://localhost:3000/api";
 
-
-let parentSite = "https://www.google.com";
-
 var elements = tap.elements({});
 var style = {
   base: {
@@ -85,6 +82,7 @@ async function postToServer(result) {
       queryDict[item.split("=")[0]] = item.split("=")[1];
     });
   result.params = queryDict;
+
   console.log("DATA SEND TO SERVER", result);
   // code for geting params fromn url
 
@@ -92,10 +90,10 @@ async function postToServer(result) {
     .post(apiUrl + "/serverCharge/chargeRequest", result)
     .then((res) => {
       console.log("Charge Responce: ", res);
-      console.log("Redirect To returnUrl with charge Response");
-      if (res.data.status == "INITIATED") {
-        window.location.href = res.data.transaction.url;
+      if (res.data.redirectUrl) {
+        window.location.href = res.data.redirectUrl;
       }
+      console.log("Redirect To returnUrl with charge Response");
     })
     .catch((err) => console.error("error from server : ", err));
 }

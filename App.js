@@ -14,21 +14,16 @@ app.use(express.static("public"));
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/", function (req, res) {
-  console.log('Welcome To App')
+  console.log("Welcome To App");
   res.sendFile(path.join(__dirname + "/views/Card.html"));
 });
 
 app.get("/transction", function (req, res) {
-  console.log('Welcome To Transction Page')
-  console.log('88888888888888888888888888888888888',req);
-  console.log('data++++++++++++++++++++++',req.data , );
-  console.log('error------------------------',req.error);
-  console.log('payload--------------------',req.payload);
-  console.log('***************************************',req.body)
+  console.log("Welcome To Transction Page");
   res.sendFile(path.join(__dirname + "/views/Transction.html"));
 });
-//Routes
 
+//Routes
 app.use("/api/token", require("./Token"));
 app.use("/api/serverCharge", require("./Charge"));
 
