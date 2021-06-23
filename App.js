@@ -24,7 +24,6 @@ app.get("/transction", function (req, res) {
 });
 
 //Routes
-app.use("/api/token", require("./Token"));
 app.use("/api/serverCharge", require("./Charge"));
 
 /// catch 404 and forward to error handler
