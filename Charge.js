@@ -37,7 +37,7 @@ router.post("/chargeRequest", async (req, res) => {
           url: decodeURIComponent(params.returnUrl),
         },
         redirect: {
-          url: process.env.Host + "/transction",
+          url: process.env.HOST + "/transction",
         },
       },
       {
