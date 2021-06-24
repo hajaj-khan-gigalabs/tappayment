@@ -64,7 +64,7 @@ router.post("/chargeRequest", async (req, res) => {
           console.log(
             returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=OK"
@@ -73,7 +73,7 @@ router.post("/chargeRequest", async (req, res) => {
             redirectUrl:
               returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=OK",
@@ -88,7 +88,7 @@ router.post("/chargeRequest", async (req, res) => {
           console.log(
             returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=FAIL"
@@ -97,7 +97,7 @@ router.post("/chargeRequest", async (req, res) => {
             redirectUrl:
               returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=FAIL",
@@ -163,7 +163,7 @@ router.post("/checkCharge", async (req, res) => {
           console.log(
             returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=OK"
@@ -172,7 +172,7 @@ router.post("/checkCharge", async (req, res) => {
             redirectUrl:
               returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=OK",
@@ -191,7 +191,7 @@ router.post("/checkCharge", async (req, res) => {
           console.log(
             returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=FAIL"
@@ -200,7 +200,7 @@ router.post("/checkCharge", async (req, res) => {
             redirectUrl:
               returnURL +
               "&amount=" +
-              response.data.amount +
+              response.data.amount * 100 +
               "&signature=" +
               hash +
               "&result=FAIL",
