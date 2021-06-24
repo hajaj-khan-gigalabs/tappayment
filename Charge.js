@@ -116,7 +116,7 @@ router.post("/chargeRequest", async (req, res) => {
       console.log(
         returnURL +
           "&amount=" +
-          params.amount +
+          params.amount * 100 +
           "&signature=" +
           hash +
           "&result=FAIL"
@@ -125,7 +125,7 @@ router.post("/chargeRequest", async (req, res) => {
         redirectUrl:
           returnURL +
           "&amount=" +
-          params.amount +
+          params.amount * 100 +
           "&signature=" +
           hash +
           "&result=FAIL",
