@@ -16,9 +16,9 @@ async function postToServer() {
     .post(apiUrl + "/serverCharge/checkCharge", result)
     .then((res) => {
       console.log("Transcation Responce: ", res);
-      // if (res.data.redirectUrl) {
-      //   window.location.href = res.data.redirectUrl;
-      // }
+      if (res.data.redirectUrl) {
+        window.location.href = res.data.redirectUrl;
+      }
     })
     .catch((err) => console.error("error from server : ", err));
 }

@@ -10,6 +10,7 @@ app.use(cors());
 // Normal express config defaults
 app.use(express.json());
 app.use(express.static("public"));
+// app.use(express.static("images"));
 
 app.set("views", path.join(__dirname, "views"));
 

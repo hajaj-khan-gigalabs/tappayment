@@ -1,7 +1,14 @@
+// Hide Loadeer 
+var loaderImage = document.getElementById("loading");
+loaderImage.style.display = "none";
+
+
 //pass your public key from tap's dashboard
+// var tap = Tapjsli("pk_test_qZypCznEF3QklDJdPGbj2tTS");
+// let apiUrl = "http://localhost:3000/api";
 var tap = Tapjsli("pk_live_OHQUgMAmBfpnv1ol65Sty3xX");
 let apiUrl = "https://www.minmaxopt.com/api";
-// let apiUrl = "http://localhost:3000/api";
+
 
 var elements = tap.elements({});
 var style = {
@@ -20,6 +27,7 @@ var style = {
     color: "red",
   },
 };
+
 // input labels/placeholders
 var labels = {
   cardNumber: "Card Number",
@@ -27,6 +35,7 @@ var labels = {
   cvv: "CVV",
   cardHolder: "Card Holder Name",
 };
+
 //payment options
 var paymentOptions = {
   currencyCode: ["KWD", "USD", "SAR"],
@@ -62,7 +71,7 @@ form.addEventListener("submit", function (event) {
 
 card.addEventListener("change", function (event) {
   if (event.BIN) {
-    console.log(event.BIN);
+    //show BIN
   }
   var displayError = document.getElementById("card-errors");
   if (event.error) {
@@ -73,6 +82,10 @@ card.addEventListener("change", function (event) {
 });
 
 async function postToServer(result) {
+  //Show Loader
+  loaderImage.style.display = "block";
+
+  //Get poarams from the url
   var queryDict = {};
   await location.search
     .substr(1)
@@ -82,14 +95,21 @@ async function postToServer(result) {
     });
   result.params = queryDict;
 
-  // code for geting params fromn url
-
+  // Send request to server for charge
   axios
     .post(apiUrl + "/serverCharge/chargeRequest", result)
     .then((res) => {
+      //return back to clint return_url with "Ok" for live Keys and redirect to send box of tap for test keys
       if (res.data.redirectUrl) {
         window.location.href = res.data.redirectUrl;
       }
     })
-    .catch((err) => console.error("error from server : ", err));
+    .catch((err) => {
+      console.error("error from server : ", err);
+      //return back to clint return_url with "FAIL" status
+
+      if (err.data.redirectUrl) {
+        window.location.href = err.data.redirectUrl;
+      }
+    });
 }
