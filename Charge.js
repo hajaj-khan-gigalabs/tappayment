@@ -10,7 +10,7 @@ router.post("/chargeRequest", async (req, res) => {
     .post(
       "https://api.tap.company/v2/charges",
       {
-        amount: params.amount,
+        amount: params.amount / 100,
         currency: params.currency,
         threeDSecure: true,
         save_card: false,
@@ -45,11 +45,12 @@ router.post("/chargeRequest", async (req, res) => {
       }
     )
     .then(async (response) => {
-      console.log("Resuest Response", response.data);
+      // console.log("Resuest Response", response.data);
       let returnURL = await decodeURIComponent(params.returnUrl);
       let ResponceString, hash;
       switch (response.data.status) {
         case "INITIATED":
+          console.log(response.data.transaction.url);
           return res
             .status(200)
             .json({ redirectUrl: response.data.transaction.url });
@@ -60,6 +61,14 @@ router.post("/chargeRequest", async (req, res) => {
             .createHmac("sha256", appSecret)
             .update(ResponceString)
             .digest("hex");
+          console.log(
+            returnURL +
+              "&amount=" +
+              response.data.amount +
+              "&signature=" +
+              hash +
+              "&result=OK"
+          );
           return res.status(200).json({
             redirectUrl:
               returnURL +
@@ -76,6 +85,14 @@ router.post("/chargeRequest", async (req, res) => {
             .createHmac("sha256", appSecret)
             .update(ResponceString)
             .digest("hex");
+          console.log(
+            returnURL +
+              "&amount=" +
+              response.data.amount +
+              "&signature=" +
+              hash +
+              "&result=FAIL"
+          );
           return res.status(200).json({
             redirectUrl:
               returnURL +
@@ -96,6 +113,14 @@ router.post("/chargeRequest", async (req, res) => {
         .createHmac("sha256", appSecret)
         .update(ResponceString)
         .digest("hex");
+      console.log(
+        returnURL +
+          "&amount=" +
+          params.amount +
+          "&signature=" +
+          hash +
+          "&result=FAIL"
+      );
       return res.status(400).json({
         redirectUrl:
           returnURL +
@@ -115,11 +140,13 @@ router.post("/checkCharge", async (req, res) => {
       headers: { authorization: "Bearer " + requestSecretToken },
     })
     .then(async (response) => {
-      console.log("Resuest Response", response);
+      // console.log("Resuest Response", response);
       let returnURL = await decodeURIComponent(response.data.post.url);
       let ResponceString, hash;
+      console.log(response.data.status);
       switch (response.data.status) {
         case "INITIATED":
+          console.log(response.data.transaction.url);
           return res
             .status(200)
             .json({ redirectUrl: response.data.transaction.url });
@@ -133,6 +160,14 @@ router.post("/checkCharge", async (req, res) => {
             .createHmac("sha256", appSecret)
             .update(ResponceString)
             .digest("hex");
+          console.log(
+            returnURL +
+              "&amount=" +
+              response.data.amount +
+              "&signature=" +
+              hash +
+              "&result=OK"
+          );
           return res.status(200).json({
             redirectUrl:
               returnURL +
@@ -153,7 +188,14 @@ router.post("/checkCharge", async (req, res) => {
             .createHmac("sha256", appSecret)
             .update(ResponceString)
             .digest("hex");
-
+          console.log(
+            returnURL +
+              "&amount=" +
+              response.data.amount +
+              "&signature=" +
+              hash +
+              "&result=FAIL"
+          );
           return res.status(200).json({
             redirectUrl:
               returnURL +

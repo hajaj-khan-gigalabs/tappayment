@@ -15,9 +15,10 @@ async function postToServer() {
   axios
     .post(apiUrl + "/serverCharge/checkCharge", result)
     .then((res) => {
-      if (res.data.redirectUrl) {
-        window.location.href = res.data.redirectUrl;
-      }
+      console.log("Transcation Responce: ", res);
+      // if (res.data.redirectUrl) {
+      //   window.location.href = res.data.redirectUrl;
+      // }
     })
     .catch((err) => console.error("error from server : ", err));
 }
